@@ -1,0 +1,1226 @@
+/* 
+===============================
+   Main Styles for Sneha's Portfolio
+   Author: Sneha
+   Version: 1.0
+   Material Design Implementation
+===============================
+*/
+
+/* ===== Base Styles ===== */
+:root {
+    /* Light Theme Variables - Material Design Palette */
+    --primary-color: #6200ee;       /* Material Purple 500 */
+    --primary-variant: #3700b3;     /* Material Purple 700 */
+    --secondary-color: #03dac6;     /* Material Teal 200 */
+    --secondary-variant: #018786;   /* Material Teal 900 */
+    --light-color: #ffffff;
+    --surface-color: #ffffff;
+    --background-color: #f5f5f7;
+    --dark-color: #121212;         /* Material Dark Background */
+    --grey-color: #f5f5f7;
+    --text-color: #333333;
+    --text-light: #757575;         /* Material Grey 600 */
+    --border-color: #e0e0e0;       /* Material Grey 300 */
+    --success-color: #00c853;      /* Material Green A700 */
+    --error-color: #b00020;        /* Material Error */
+    
+    /* Material Elevation Shadows */
+    --elevation-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    --elevation-2: 0 3px 6px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.12);
+    --elevation-3: 0 10px 20px rgba(0,0,0,0.15), 0 3px 6px rgba(0,0,0,0.10);
+    --elevation-4: 0 15px 25px rgba(0,0,0,0.15), 0 5px 10px rgba(0,0,0,0.05);
+    --elevation-5: 0 20px 40px rgba(0,0,0,0.2);
+    
+    /* Font Variables - Material Recommended */
+    --font-heading: 'Roboto', 'Segoe UI', sans-serif;
+    --font-body: 'Roboto', 'Segoe UI', sans-serif;
+    
+    /* Animation Speed */
+    --transition-speed: 0.3s;
+    --transition-function: cubic-bezier(0.4, 0.0, 0.2, 1); /* Material standard easing */
+}
+
+/* Dark Theme Variables - Material Dark Theme */
+[data-theme="dark"] {
+    --primary-color: #bb86fc;       /* Material Purple 200 */
+    --primary-variant: #3700b3;     /* Material Purple 700 */
+    --secondary-color: #03dac6;     /* Material Teal 200 */
+    --secondary-variant: #03dac6;   /* Material Teal 200 (no change in dark) */
+    --light-color: #121212;         /* Material Dark Background */
+    --surface-color: #1e1e1e;       /* Material Dark Surface */
+    --background-color: #121212;    /* Material Dark Background */
+    --dark-color: #e0e0e0;          /* Text/icons on dark background */
+    --grey-color: #2d2d3a;          /* Custom dark grey */
+    --text-color: #ffffff;          /* White text */
+    --text-light: #b0b0b0;          /* Light grey text */
+    --border-color: #2d2d3a;        /* Border for dark theme */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-color);
+    transition: background-color var(--transition-speed) ease;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body.loading {
+    overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    line-height: 1.3;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+h3 {
+    font-size: 1.8rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all var(--transition-speed) ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.section-padding {
+    padding: 100px 0;
+}
+
+/* ===== Preloader ===== */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--light-color);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.6s ease;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--grey-color);
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== Custom Cursor ===== */
+.cursor {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: transform 0.2s ease;
+}
+
+.cursor-follower {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--primary-color);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.cursor-grow {
+    transform: scale(2.5);
+    background: rgba(124, 93, 250, 0.1);
+    mix-blend-mode: normal;
+}
+
+/* ===== Button Styles - Material Design ===== */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 4px;        /* Material uses less rounded corners */
+    font-weight: 500;         /* Medium weight for Material */
+    text-transform: uppercase; /* Material typically uses uppercase for buttons */
+    letter-spacing: 1.25px;   /* Material button letter spacing */
+    transition: all 0.2s var(--transition-function);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;      /* 14px per Material specs */
+    box-shadow: var(--elevation-1);
+}
+
+/* Material ripple effect */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.btn:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scale(25, 25);
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
+}
+
+.primary-btn {
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: var(--elevation-2);
+}
+
+.primary-btn:hover {
+    background: var(--primary-variant);
+    color: #fff;
+    box-shadow: var(--elevation-3);
+}
+
+.primary-btn:active {
+    box-shadow: var(--elevation-1);
+    transform: translateY(1px);
+}
+
+.secondary-btn {
+    background: var(--surface-color);
+    color: var(--primary-color);
+    border: none;
+    box-shadow: var(--elevation-1);
+}
+
+.secondary-btn:hover {
+    background: rgba(98, 0, 238, 0.08); /* 8% opacity primary color background */
+    box-shadow: var(--elevation-2);
+}
+
+.secondary-btn:active {
+    box-shadow: var(--elevation-1);
+    transform: translateY(1px);
+}
+
+/* ===== Header Styles - Material Design ===== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0;
+    z-index: 1000;
+    transition: all 0.3s var(--transition-function);
+    background: var(--surface-color);
+}
+
+header.sticky {
+    padding: 0.8rem 0;
+    background: var(--surface-color);
+    box-shadow: var(--elevation-2);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+    margin-right: 0.7rem;
+    box-shadow: var(--elevation-1);
+}
+
+.logo-text {
+    font-size: 1.25rem;
+    font-weight: 500; /* Material uses 500 for medium weight */
+    color: var(--text-color);
+    letter-spacing: 0.15px; /* Material spec for headline 6 */
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links li a {
+    color: var(--text-color);
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 0;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 1.25px;
+    transition: color 0.2s var(--transition-function);
+}
+
+/* Material Design uses bottom border indicator for active nav */
+.nav-links li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.2s var(--transition-function);
+}
+
+.nav-links li a:hover::after,
+.nav-links li a.active::after {
+    width: 100%;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+    color: var(--primary-color);
+}
+
+.hamburger {
+    display: none;
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--grey-color);
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    position: relative;
+    overflow: hidden;
+    margin-left: 1.5rem;
+}
+
+.theme-toggle i {
+    position: absolute;
+    font-size: 1.2rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.theme-toggle .fa-moon {
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.theme-toggle .fa-sun {
+    transform: translateY(0);
+    opacity: 1;
+    color: #ffa500;
+}
+
+[data-theme="dark"] .theme-toggle .fa-moon {
+    transform: translateY(0);
+    opacity: 1;
+    color: #c0c0c0;
+}
+
+[data-theme="dark"] .theme-toggle .fa-sun {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+    padding: 200px 0 100px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(124, 93, 250, 0.1), rgba(94, 68, 211, 0.1));
+    z-index: -1;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.hero-text h1 {
+    margin-bottom: 1.5rem;
+}
+
+.hero-text h1 .highlight {
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+}
+
+.hero-text h1 .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: rgba(124, 93, 250, 0.2);
+    z-index: -1;
+}
+
+.hero-text h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.typed-text {
+    color: var(--primary-color);
+}
+
+.hero-text p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 500px;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--grey-color);
+    color: var(--text-color);
+    font-size: 1.2rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.social-icons a:hover {
+    background: var(--primary-color);
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+.hero-image {
+    position: relative;
+}
+
+.blob-animation {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blob {
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    animation: blob 8s linear infinite;
+}
+
+@keyframes blob {
+    0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+    50% { border-radius: 50% 60% 30% 60% / 40% 60% 70% 40%; }
+    75% { border-radius: 60% 40% 70% 30% / 60% 40% 30% 70%; }
+    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+
+.hero-image img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+}
+
+.scroll-down {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.scroll-down a {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-20px); }
+    60% { transform: translateY(-10px); }
+}
+
+/* ===== Section Styles - Material Design ===== */
+section {
+    padding: 5rem 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-title {
+    font-size: 2.125rem; /* Material Design H4 size */
+    font-weight: 400; /* Material uses lighter weight for headlines */
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    letter-spacing: 0.25px; /* Material spec for headline 4 */
+}
+
+.section-subtitle {
+    font-size: 1rem; /* Material body 1 */
+    color: var(--text-light);
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 400;
+    letter-spacing: 0.5px; /* Material spec for body 1 */
+    line-height: 1.5;
+}
+
+.divider {
+    width: 80px;
+    height: 4px;
+    background: var(--primary-color);
+    margin: 1.5rem auto;
+    border-radius: 2px; /* Slightly rounded edges */
+}
+
+/* ===== About Section ===== */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-image {
+    position: relative;
+}
+
+.image-border {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    margin: 0 auto;
+}
+
+.image-border::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 100%;
+    height: 100%;
+    border: 5px solid var(--primary-color);
+    z-index: -1;
+}
+
+.image-border img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about-text h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.about-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.info-item {
+    margin-bottom: 1rem;
+}
+
+.info-item span {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* ===== Skills Section ===== */
+.skills-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.skill-category h3 {
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+.skill-category h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: var(--primary-color);
+}
+
+.skill-items {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.skill-item {
+    background: var(--surface-color);
+    padding: 1.5rem;
+    border-radius: 4px;  /* Material Design uses smaller border radius */
+    transition: all 0.2s var(--transition-function);
+    box-shadow: var(--elevation-1);
+    margin-bottom: 1rem;
+}
+
+.skill-item:hover {
+    transform: translateY(-4px); /* Subtle lift */
+    box-shadow: var(--elevation-2);
+}
+
+.skill-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.skill-item h4 {
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #e7e7e7;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border-radius: 5px;
+    transition: width 1.5s ease-in-out;
+}
+
+/* ===== Portfolio Section - Material Design ===== */
+.portfolio-filter {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.portfolio-filter ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.portfolio-filter li {
+    padding: 8px 16px;
+    border-radius: 4px;  /* Material Design uses smaller border radius */
+    cursor: pointer;
+    transition: all 0.2s var(--transition-function);
+    font-weight: 500;
+    background: var(--surface-color);
+    color: var(--text-color);
+    box-shadow: var(--elevation-1);
+    font-size: 0.875rem;
+    letter-spacing: 0.25px;
+}
+
+.portfolio-filter li:hover {
+    background: rgba(98, 0, 238, 0.08); /* Light primary color background */
+    box-shadow: var(--elevation-2);
+}
+
+.portfolio-filter li.filter-active {
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: var(--elevation-2);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.portfolio-item {
+    border-radius: 4px; /* Material Design uses smaller border radius */
+    overflow: hidden;
+    position: relative;
+    box-shadow: var(--elevation-1);
+    transition: all 0.2s var(--transition-function);
+    background-color: var(--surface-color);
+}
+
+.portfolio-item:hover {
+    transform: translateY(-4px); /* Subtle lift */
+    box-shadow: var(--elevation-3);
+}
+
+.portfolio-image {
+    height: 250px;
+    position: relative;
+}
+
+.portfolio-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(21, 28, 57, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all var(--transition-speed) ease;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-info {
+    text-align: center;
+    padding: 1rem;
+    transform: translateY(20px);
+    transition: all var(--transition-speed) ease;
+}
+
+.portfolio-item:hover .portfolio-info {
+    transform: translateY(0);
+}
+
+.portfolio-info h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.portfolio-info p {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1rem;
+}
+
+.portfolio-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.portfolio-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.portfolio-links a:hover {
+    background: var(--primary-color);
+}
+
+/* ===== Contact Section - Material Design ===== */
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+}
+
+.contact-info {
+    background: var(--surface-color);
+    padding: 2rem;
+    border-radius: 4px; /* Material uses smaller radius */
+    box-shadow: var(--elevation-1);
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.info-item .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    /* Material Design likes subtle shadows */
+    box-shadow: var(--elevation-1);
+}
+
+.info-item .text h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500; /* Material uses 500 for medium weight */
+}
+
+.contact-info .social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.contact-info .social-links a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--surface-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    transition: all 0.2s var(--transition-function);
+    box-shadow: var(--elevation-1);
+}
+
+.contact-info .social-links a:hover {
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: var(--elevation-2);
+}
+
+.contact-form {
+    background: var(--surface-color);
+    padding: 2rem;
+    border-radius: 4px; /* Material uses smaller radius */
+    box-shadow: var(--elevation-1);
+}
+
+/* Material Design Form Fields */
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem 1rem 0.5rem;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 4px 4px 0 0;
+    background: var(--surface-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    transition: all 0.2s var(--transition-function);
+    font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-bottom: 2px solid var(--primary-color);
+    /* No box shadow in Material inputs, just the bottom border */
+}
+
+.form-group input:focus + label,
+.form-group textarea:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group textarea:not(:placeholder-shown) + label {
+    transform: translateY(-20px) scale(0.75);
+    color: var(--primary-color);
+}
+
+.form-group label {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: var(--text-light);
+    pointer-events: none;
+    transition: all 0.2s var(--transition-function);
+}
+
+.form-group textarea {
+    resize: none;
+    height: 120px;
+}
+
+#form-message {
+    margin-top: 1rem;
+}
+
+.success-message {
+    padding: 1rem;
+    background: rgba(0, 200, 83, 0.08); /* 8% opacity of success color */
+    border-left: 4px solid var(--success-color);
+    color: var(--success-color);
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+.error-message {
+    padding: 1rem;
+    background: rgba(176, 0, 32, 0.08); /* 8% opacity of error color */
+    border-left: 4px solid var(--error-color);
+    color: var(--error-color);
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+/* ===== Footer - Material Design ===== */
+footer {
+    background: var(--primary-color); /* Material often uses primary color for footer */
+    padding: 3rem 0;
+    color: #fff;
+    /* Material Design likes subtle shadows */
+    box-shadow: var(--elevation-3);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Better for mobile */
+    gap: 1rem;
+}
+
+footer .logo-text {
+    color: #fff;
+    font-weight: 500;
+    /* No background in footer logo */
+}
+
+footer .social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+footer .social-icons a {
+    background: rgba(255, 255, 255, 0.2); /* More visible with 20% opacity */
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s var(--transition-function);
+}
+
+footer .social-icons a:hover {
+    background: rgba(255, 255, 255, 0.3); /* Lighter on hover */
+    transform: translateY(-3px);
+}
+
+/* ===== Back to Top Button ===== */
+.back-to-top {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 99;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-speed) ease;
+}
+
+.back-to-top.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background: var(--secondary-color);
+    transform: translateY(-5px);
+}
+
+/* ===== Responsive Styles ===== */
+@media (max-width: 1024px) {
+    h1 {
+        font-size: 3.5rem;
+    }
+    
+    .hero-content {
+        gap: 2rem;
+    }
+    
+    .skills-content,
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 3rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    .section-padding {
+        padding: 80px 0;
+    }
+    
+    .hero {
+        padding: 150px 0 80px;
+    }
+    
+    .hero-content,
+    .about-content,
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-image {
+        order: -1;
+        margin-bottom: 2rem;
+    }
+    
+    .blob-animation {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .blob {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .hero-image img {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .image-border {
+        width: 250px;
+        height: 350px;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 250px;
+        height: 100vh;
+        background: var(--light-color);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 2rem;
+        z-index: 1000;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+    }
+    
+    .nav-links.active {
+        right: 0;
+    }
+    
+    .nav-links li {
+        margin: 1rem 0;
+    }
+    
+    .hamburger {
+        display: block;
+        z-index: 1001;
+    }
+    
+    .hamburger.active .line:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    
+    .hamburger.active .line:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active .line:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    .hero-btns {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .skills-content,
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-info {
+        grid-template-columns: 1fr;
+    }
+    
+    .portfolio-filter li {
+        padding: 5px 15px;
+        font-size: 0.9rem;
+    }
+}
