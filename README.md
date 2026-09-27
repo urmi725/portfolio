@@ -1,4 +1,4 @@
-# Sneha Shakya Portfolio Website
+# Sneha Portfolio Website
 
 A modern, responsive portfolio website showcasing Sneha Shakya's skills, projects, and professional experience. This portfolio features a beautiful UI with animations, dark/light mode, and a Python backend with Firebase integration.
 
@@ -11,6 +11,7 @@ A modern, responsive portfolio website showcasing Sneha Shakya's skills, project
 - Portfolio filtering by category
 - Contact form with Firebase integration
 - Python Flask backend API
+- T his is simple and clear website that describe my profile
 
 ## Technologies Used
 
